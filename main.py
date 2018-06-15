@@ -7,7 +7,7 @@ from data import data_generator
 
 epochs = 200
 train_size = 1500
-batch_size = 32
+batch_size = 128
 steps_per_epoch = round(train_size / batch_size)
 
 net = models.MiniSqueezeNet(1, 10)
