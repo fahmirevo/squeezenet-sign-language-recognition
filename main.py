@@ -5,7 +5,7 @@ import models
 
 from data import data_generator
 
-epochs = 200
+epochs = 400
 train_size = 1500
 batch_size = 128
 steps_per_epoch = round(train_size / batch_size)
@@ -19,8 +19,6 @@ data_gen = data_generator(batch_size=batch_size)
 
 for epoch in range(epochs):
 
-    loss = 0
-
     for step in range(steps_per_epoch):
         inputs, labels = next(data_gen)
         inputs = torch.Tensor(inputs)
@@ -32,32 +30,9 @@ for epoch in range(epochs):
         loss.backward()
         optimizer.step()
 
-        loss += loss.item()
-        # print(f'epoch : {epoch} step : {step} loss : {loss}')
+        loss = loss.item()
 
-    loss /= steps_per_epoch
-    print(f'epoch : {epoch} loss : {loss}')
+        acc = (labels.max(1)[1] == outputs.max(1)[1]).float().sum() / outputs.size(0)
+        print(f'epoch : {epoch} step : {step} loss : {loss} acc : {acc}')
 
 torch.save(net, 'net.pt')
-
-for epoch in range(epochs):
-
-    loss = 0
-
-    for step in range(steps_per_epoch):
-        inputs, labels = next(data_gen)
-        inputs = torch.Tensor(inputs)
-        labels = torch.Tensor(labels)
-        optimizer.zero_grad()
-
-        outputs = net(inputs)
-        loss = criterion(outputs, labels)
-        loss.backward()
-        optimizer.step()
-
-        loss += loss.item()
-        # print(f'epoch : {epoch} step : {step} loss : {loss}')
-
-    print(f'epoch : {epoch} loss : {loss}')
-
-torch.save(net, 'overnet.pt')

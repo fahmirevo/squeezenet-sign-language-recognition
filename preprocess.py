@@ -6,13 +6,13 @@ def nchw(data):
 
 
 def train_test_split(X, Y, train_size=0.75):
-    idx = np.arange(len(X))
-    np.random.shuffle(idx)
+    idxs = np.arange(len(X))
+    np.random.shuffle(idxs)
 
     splitter = int(len(X) * train_size)
 
-    X_train, X_test = X[:splitter], X[splitter:]
-    Y_train, Y_test = Y[:splitter], Y[splitter:]
+    X_train, X_test = X[idxs[:splitter]], X[idxs[splitter:]]
+    Y_train, Y_test = Y[idxs[:splitter]], Y[idxs[splitter:]]
 
     return X_train, Y_train, X_test, Y_test
 
