@@ -38,7 +38,7 @@ for epoch in range(epochs):
     loss /= steps_per_epoch
     print(f'epoch : {epoch} loss : {loss}')
 
-net.save_state_dict('net.pt')
+torch.save(net, 'net.pt')
 
 for epoch in range(epochs):
 
@@ -58,7 +58,6 @@ for epoch in range(epochs):
         loss += loss.item()
         # print(f'epoch : {epoch} step : {step} loss : {loss}')
 
-    loss /= steps_per_epoch
     print(f'epoch : {epoch} loss : {loss}')
 
-net.save_state_dict('overnet.pt')
+torch.save(net, 'overnet.pt')
