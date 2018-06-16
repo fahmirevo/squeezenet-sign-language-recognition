@@ -4,8 +4,8 @@ import torch
 
 from data import data_generator
 
-epochs = 1500
-train_size = 1500
+epochs = 100
+train_size = 22500
 batch_size = 128
 steps_per_epoch = round(train_size / batch_size)
 
